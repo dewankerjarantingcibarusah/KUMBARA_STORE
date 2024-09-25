@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Kumbara Store</string>
+    <string name="google_app_id">1:298095922881:android:5f12429595c2e80fb70e40</string>
+
+    <string-array name="jenis_kelamin_array">
+
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

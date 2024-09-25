@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAtas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@color/loading"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage" />
+
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvProductStok"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName" />
+
+            <TextView
+                android:id="@+id/tvProductStok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/ivAddToCart"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage"
+                app:layout_constraintTop_toBottomOf="@id/tvProductPrice" />
+
+
+            <ImageView
+                android:id="@+id/ivAddToCart"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:background="@color/loading"
+                android:clickable="true"
+                android:contentDescription="Tambahkan ke keranjang"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductStok"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/ivProductImage2"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="20dp"
+                android:background="@color/loading"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/ivProductImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvProductName2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage2"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage2"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage2" />
+
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tvProductPrice2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvProductStok2"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage2"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName2" />
+
+            <TextView
+                android:id="@+id/tvProductStok2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/ivAddToCart2"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage2"
+                app:layout_constraintTop_toBottomOf="@id/tvProductPrice2" />
+
+
+            <ImageView
+                android:id="@+id/ivAddToCart2"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:background="@color/loading"
+                android:clickable="true"
+                android:contentDescription="Tambahkan ke keranjang"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductStok2"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage2"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage2"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/ivProductImage3"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/loading"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductStok"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvProductName3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage3"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage3"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage3" />
+
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tvProductPrice3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvProductStok3"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage3"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName3" />
+
+            <TextView
+                android:id="@+id/tvProductStok3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/ivAddToCart3"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage3"
+                app:layout_constraintTop_toBottomOf="@id/tvProductPrice3" />
+
+
+            <ImageView
+                android:id="@+id/ivAddToCart3"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:background="@color/loading"
+                android:clickable="true"
+                android:contentDescription="Tambahkan ke keranjang"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage3"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage3"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage3"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/ivProductImage4"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/loading"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage2"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductStok2"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvProductName4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage4"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage4"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage4" />
+
+            <!-- Harga -->
+            <TextView
+                android:id="@+id/tvProductPrice4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvProductStok4"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage4"
+                app:layout_constraintTop_toBottomOf="@id/tvProductName4" />
+
+            <TextView
+                android:id="@+id/tvProductStok4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/loading"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/ivAddToCart4"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage4"
+                app:layout_constraintTop_toBottomOf="@id/tvProductPrice4" />
+
+
+            <ImageView
+                android:id="@+id/ivAddToCart4"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:background="@color/loading"
+                android:clickable="true"
+                android:contentDescription="Tambahkan ke keranjang"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductStok4"
+                app:layout_constraintEnd_toEndOf="@+id/ivProductImage4"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ivProductImage4"
+                app:layout_constraintTop_toBottomOf="@+id/ivProductImage4"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

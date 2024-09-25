@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/bottom_Beranda"
+        android:icon="@drawable/ic_beranda"
+        android:title="Beranda" />
+
+    <item
+        android:id="@+id/bottom_kateogri"
+        android:icon="@drawable/ic_kategori"
+        android:title="Kategori" />
+
+    <item
+        android:id="@+id/bottom_Notifikasi"
+        android:icon="@drawable/ic_notifikasi"
+        android:title="Notifikasi" />
+    <item
+        android:id="@+id/bottom_akun"
+        android:icon="@drawable/ic_akun"
+        android:title="Akun" />
+
+
+</menu>

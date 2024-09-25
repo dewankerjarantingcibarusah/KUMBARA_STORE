@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "931074003524",
+    "project_id": "kumbara-store",
+    "storage_bucket": "kumbara-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931074003524:android:c5c101a2ef0629fa4ae211",
+        "android_client_info": {
+          "package_name": "com.dkr.kumbarastore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsR-x3lAIKcS7A1Kdbauj2LulK4gMoeBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

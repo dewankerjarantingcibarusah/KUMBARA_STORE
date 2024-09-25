@@ -1,0 +1,19 @@
+<!-- res/menu/bottom_nav_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_beranda"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_Categoris"
+        android:icon="@drawable/ic_kategori"
+        android:title="Categories" />
+    <item
+        android:id="@+id/nav_Notifikasi"
+        android:icon="@drawable/ic_akun"
+        android:title="Notifikasi" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_akun"
+        android:title="Profile" />
+</menu>

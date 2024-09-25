@@ -1,0 +1,220 @@
+package com.dkr.kumbarastore;
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
+public class MyApp extends Application {
+
+    private static MyApp instance;
+    private boolean isInForeground = false;
+    private Handler toastHandler = new Handler();
+    private Toast lastToast;
+    private NetworkChangeReceiver networkChangeReceiver;
+
+    private LocationChangeReceiver LocationChangeReceiver;
+
+    private static final String PREFS_NAME = "UserPrefs";
+    private static final String ROLE_KEY = "role";
+    private static final String LOGIN_STATUS_KEY = "isLoggedIn";
+    private SharedPreferences sharedPreferences;
+    private int activityReferences = 0;
+    private boolean isActivityChangingConfigurations = false;
+    private Handler updateHandler = new Handler();
+    private Runnable updateRunnable;
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        networkChangeReceiver = new NetworkChangeReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeReceiver, filter);
+
+        // Daftarkan LocationChangeReceiver
+        LocationChangeReceiver = new LocationChangeReceiver();
+        IntentFilter locationFilter = new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION);
+        registerReceiver(LocationChangeReceiver, locationFilter);
+
+        // Inisialisasi Runnable
+        updateRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // Jalankan metode pembaruan
+                UpdateDatabase.checkLocationStatus(getApplicationContext());
+                UpdateDatabase.updateLocation(getApplicationContext());
+                updateHandler.postDelayed(this, 1000);
+            }
+        };
+
+        // Mulai handler pertama kali
+        updateHandler.post(updateRunnable);
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+                // Cek apakah pengguna sudah login dan data penting sudah tersedia
+                SharedPreferences sharedPreferences = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                boolean isLoggedIn = sharedPreferences.getBoolean(LOGIN_STATUS_KEY, false);
+                String kta = sharedPreferences.getString("kta", "");
+                String role = sharedPreferences.getString(ROLE_KEY, "");
+
+                if (!isLoggedIn || TextUtils.isEmpty(kta) || TextUtils.isEmpty(role)) {
+                    // Jika belum login atau data penting belum tersedia, arahkan ke layar login atau pengaturan awal
+
+                } else if (++activityReferences == 1 && !isActivityChangingConfigurations) {
+                    // Aplikasi masuk ke latar depan
+                    isInForeground = true;
+
+                    UpdateDatabase.UpdateAktif(activity.getApplicationContext());
+                    {
+                      UpdateDatabase.UpdateAktif(activity.getApplicationContext());
+                    }
+                }
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+                isInForeground = true;
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+                isInForeground = false;
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+                // Cek apakah pengguna sudah login dan data penting sudah tersedia
+                isActivityChangingConfigurations = activity.isChangingConfigurations();
+                SharedPreferences sharedPreferences = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                boolean isLoggedIn = sharedPreferences.getBoolean(LOGIN_STATUS_KEY, false);
+                String kta = sharedPreferences.getString("kta", "");
+                String role = sharedPreferences.getString(ROLE_KEY, "");
+
+                if (!isLoggedIn || TextUtils.isEmpty(kta) || TextUtils.isEmpty(role)) {
+                    // Jika belum login atau data penting belum tersedia, arahkan ke layar login atau pengaturan awal
+
+                } else if (--activityReferences == 0 && !isActivityChangingConfigurations) {
+                    // Aplikasi masuk ke latar belakang
+                    isInForeground = false;
+                    UpdateDatabase.UpdateTidakAktif(activity.getApplicationContext());
+                    {
+                        UpdateDatabase.UpdateTidakAktif(activity.getApplicationContext());
+                    }
+                }
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+            }
+        });
+    }
+
+    private void checkLoginStatus() {
+
+    }
+    public static MyApp getInstance() {
+        return instance;
+    }
+
+    public static boolean isInForeground() {
+        return instance.isInForeground;
+    }
+
+    public static boolean isInternetAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+
+
+    }
+    public void showCustomToast(String message, int toastType, Context context) {
+        if (lastToast != null) {
+            lastToast.cancel(); // Batalkan Toast sebelumnya jika masih ditampilkan
+        }
+
+        // Inflate the custom toast layout
+        Toast customToast = new Toast(context);
+        customToast.setDuration(Toast.LENGTH_SHORT);
+        View toastView = LayoutInflater.from(context).inflate(R.layout.toast_custom, null);
+
+        // Set the message
+        TextView toastText = toastView.findViewById(R.id.toast_text);
+        toastText.setText(message);
+
+        // Set the CardView color and icon based on the toast type
+        CardView cardView = toastView.findViewById(R.id.cvcostumtoast);
+        ImageView toastIcon = toastView.findViewById(R.id.toast_icon);
+
+        switch (toastType) {
+            case ToastType.ERROR:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.Red));
+                toastIcon.setImageResource(R.drawable.ic_costumtoast); // Ganti dengan drawable error
+                break;
+            case ToastType.SUCCESS:
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.Green)); // Ganti warna sesuai kebutuhan
+                toastIcon.setImageResource(R.drawable.ic_ceklis); // Ganti dengan drawable success
+                break;
+
+        }
+
+        // Set the view and show the toast
+        customToast.setView(toastView);
+        customToast.show();
+
+        toastHandler.postDelayed(() -> lastToast = null, 2000);
+    }
+
+    public void showErrorToast(Context context) {
+        showCustomToast("Tidak ada koneksi internet", ToastType.ERROR, context);
+    }
+
+    public void showSuccessToast(Context context) {
+        showCustomToast("Operasi Berhasil", ToastType.SUCCESS, context);
+    }
+    public void PembelianBerhasil(Context context) {
+            showCustomToast("Pembelian Berhasil", ToastType.SUCCESS, context);
+    }
+
+    public class ToastType {
+        public static final int ERROR = 1;
+        public static final int SUCCESS = 2;
+    }
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        if (networkChangeReceiver != null) {
+            unregisterReceiver(networkChangeReceiver);
+        }
+        if (LocationChangeReceiver != null) {
+            unregisterReceiver(LocationChangeReceiver);
+        }
+    }
+
+
+}
